@@ -48,9 +48,10 @@ with tabs[0]:
                     st.markdown(f"**Activity Log:**")
                     st.markdown("<br>".join(f"- {a}" for a in project.activityLog), unsafe_allow_html=True)
 
-            if st.button("💾 Save to projects.json"):
-                save_projects_to_json(projects, "data/projects.json")
-                st.success("Projects saved!")
+if st.button("💾 Save to projects.json"):
+    save_projects_to_json(projects, "data/projects.json")
+    st.success("Projects saved!")
+
 
         except Exception as e:
             st.error(f"❌ Failed to import: {e}")
