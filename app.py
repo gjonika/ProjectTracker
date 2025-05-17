@@ -16,6 +16,25 @@ ACTIVITY_FILE = "data/activity_log.json"
 
 tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
 
+with tabs[0]:
+    st.subheader("📥 Import Projects from CSV")
+
+    # Download Template
+    with open("data/sample_template.csv", "rb") as f:
+        st.download_button("📄 Download CSV Template", f, "project_template.csv")
+
+    # Upload CSV
+    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+    if uploaded_file:
+        from utils.data_loader import import_projects_from_csv
+
+        try:
+            count = import_projects_from_csv(uploaded_file)
+            st.success(f"✅ Imported {count} projects!")
+        except Exception as e:
+            st.error(f"❌ Failed to import: {e}")
+
+
 with tabs[1]:
     json_path = "data/projects.json"
 

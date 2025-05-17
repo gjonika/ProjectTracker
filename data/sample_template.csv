@@ -1,0 +1,2 @@
+id,name,summary,description,type,usefulness,status,stage,isMonetized,githubUrl,websiteUrl,nextAction,lastUpdated,progress,activityLog,tags
+"1","Example Project","Short summary","Longer description","personal","5","in_progress","Build","false","https://github.com/example","https://example.com","Next step to take","2023-05-10","75","Update 1; Update 2","Tag1; Tag2"
