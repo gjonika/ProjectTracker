@@ -11,14 +11,16 @@ ACTIVITY_FILE = "data/activity_log.json"
 # ---------- Load or Init Data ----------
 def load_data(path, default=[]):
     if os.path.exists(path):
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     else:
         return default
 
 def save_data(path, data):
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+
+
 
 projects = load_data(PROJECTS_FILE)
 activity_log = load_data(ACTIVITY_FILE)
