@@ -54,7 +54,6 @@ with tabs[0]:
         except Exception as e:
             st.error(f"❌ Failed to import: {e}")
 
-
 # === 2. VIEW PROJECTS TAB ===
 with tabs[1]:
     st.title("📋 Project Dashboard")
@@ -69,13 +68,41 @@ with tabs[1]:
         else:
             for project in projects:
                 with st.container():
-                    st.subheader(f"{project.name} {project.status}")
-                    st.caption(project.summary)
+                    st.markdown(f"### {project.name} {'💰' if project.isMonetized else ''}")
+                    st.markdown(f"**{project.summary}**")
+                    st.caption(project.description)
+
+                    col1, col2, col3 = st.columns([1, 1, 2])
+                    with col1:
+                        st.markdown(f"📌 **Status:** `{project.status}`")
+                    with col2:
+                        st.markdown(f"🛠️ **Stage:** `{project.stage}`")
+                    with col3:
+                        st.markdown(f"🏷️ **Type:** `{project.type}`")
+
                     st.progress(project.progress / 100)
-                    st.markdown(f"**Stage:** {project.stage} | **Type:** {project.type}")
-                    st.markdown(f"**Tags:** {', '.join(project.tags)}")
-                    st.markdown(f"**Next Action:** {project.nextAction}")
-                    st.markdown(f"[GitHub]({project.githubUrl}) | [Website]({project.websiteUrl})")
+
+                    st.markdown(f"⭐ **Usefulness:** {project.usefulness}/5")
+                    st.markdown(f"🏷️ **Tags:** {', '.join(project.tags)}")
+                    st.markdown(f"🎯 **Next Action:** _{project.nextAction}_")
+
+                    links = []
+                    if project.githubUrl:
+                        links.append(f"[GitHub]({project.githubUrl})")
+                    if project.websiteUrl:
+                        links.append(f"[Website]({project.websiteUrl})")
+                    if links:
+                        st.markdown("🔗 " + " | ".join(links))
+
+                    st.caption(f"🕓 Last Updated: `{project.lastUpdated}`")
+
+                    with st.expander("📝 Activity Log"):
+                        if project.activityLog:
+                            for i, log in enumerate(project.activityLog, start=1):
+                                st.markdown(f"- {log}")
+                        else:
+                            st.markdown("_No updates yet._")
+
                     st.divider()
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
