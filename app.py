@@ -7,8 +7,17 @@ st.set_page_config(page_title="Project Tracker", layout="centered")
 
 st.title("📥 Import Projects from CSV")
 
-# Upload CSV
+# === 🔽 Download CSV Template ===
+st.download_button(
+    label="📄 Download CSV Template",
+    data=open("templates/sample_projects.csv", "rb").read(),
+    file_name="sample_projects.csv",
+    mime="text/csv",
+)
+
+# === 📤 Upload CSV File ===
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+
 
 if uploaded_file is not None:
     with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp:
