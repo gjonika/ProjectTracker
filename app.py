@@ -12,11 +12,13 @@ PROJECTS_FILE = "data/projects.json"
 TEMPLATE_CSV = "data/sample_template.csv"
 
 tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
+
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-local_css("theme.css")
+local_css("styles/theme.css")  # ✅ Corrected path
+
 
 # --- TAB 1: Import CSV ---
 with tabs[0]:
