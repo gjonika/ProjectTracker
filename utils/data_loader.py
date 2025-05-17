@@ -39,3 +39,9 @@ def import_projects_from_csv(uploaded_file, json_path="data/projects.json"):
         json.dump(existing + new_projects, f, indent=2)
 
     return len(new_projects)
+def load_projects_from_json(json_path):
+    try:
+        with open(json_path, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
