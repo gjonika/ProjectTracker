@@ -2,6 +2,12 @@ import pandas as pd
 import json
 from datetime import datetime
 
+def safe_int(value, default=0):
+    try:
+        return int(float(value))
+    except (ValueError, TypeError):
+        return default
+
 def import_projects_from_csv(uploaded_file, json_path="data/projects.json"):
     # 🔁 Load existing JSON data
     try:
