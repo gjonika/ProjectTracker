@@ -11,43 +11,64 @@ st.set_page_config(page_title="Project Tracker", layout="centered")
 st.markdown(
     """
     <style>
-    body {
-        background-color: #F5F5F5;
-        color: #434A54;
+    html, body, [data-testid="stAppViewContainer"] {
+        background-color: #FFFDF4 !important;  /* Ivory background */
+        color: #434A54 !important;
     }
-    .stButton>button {
-        background-color: #1A237E;
-        color: white;
-        border-radius: 6px;
-        border: none;
-        padding: 0.4rem 0.8rem;
-        font-weight: 600;
-    }
-    .stButton>button:hover {
-        background-color: #FFD700;
-        color: black;
-    }
-    .stTextInput>div>div>input {
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-    }
-    .stSelectbox>div>div {
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-    }
-    .stMarkdown h3 {
+
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
         color: #1A237E;
     }
+
+    .stButton>button {
+        background-color: #1A237E !important;
+        color: white !important;
+        border-radius: 6px;
+        padding: 0.4rem 1rem;
+        font-weight: 600;
+        border: none;
+    }
+
+    .stButton>button:hover {
+        background-color: #FFD700 !important;
+        color: black !important;
+    }
+
+    .stTextInput>div>div>input,
+    .stSelectbox>div>div,
+    .stRadio>div>label {
+        background-color: white !important;
+        color: #1A237E !important;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
     .st-expander > summary {
         font-weight: bold;
         color: #1A237E;
     }
+
+    .stProgress > div > div > div {
+        background-color: #1A237E !important;
+    }
+
+    .stAlert {
+        border-left: 6px solid #FFD700;
+    }
+
+    .css-1v3fvcr { /* Tag pills */
+        background-color: #FFD700 !important;
+        color: black !important;
+        font-weight: 500;
+        border-radius: 12px;
+        padding: 0.2rem 0.6rem;
+    }
+
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 PROJECTS_FILE = "data/projects.json"
