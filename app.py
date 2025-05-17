@@ -12,21 +12,37 @@ st.markdown(
     """
     <style>
     html, body, [data-testid="stAppViewContainer"] {
-        background-color: #FFFDF4 !important;  /* Ivory background */
-        color: #434A54 !important;
+        background-color: #FFFDF4 !important;  /* Light ivory */
+        color: #1A237E !important;             /* Deep navy text */
     }
 
+    /* Headings */
     .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
-        color: #1A237E;
+        color: #1A237E !important;
     }
 
+    /* Markdown text and labels */
+    .stMarkdown, .stText, .css-1v3fvcr, .stCaption, .stCheckbox, .stRadio label, .stSelectbox label {
+        color: #1A237E !important;
+    }
+
+    /* Inputs and dropdowns */
+    input, select, textarea, .stTextInput>div>div, .stSelectbox>div>div {
+        background-color: white !important;
+        color: #1A237E !important;
+        border: 1px solid #ccc !important;
+        border-radius: 6px !important;
+        padding: 0.3rem !important;
+    }
+
+    /* Buttons */
     .stButton>button {
         background-color: #1A237E !important;
         color: white !important;
-        border-radius: 6px;
-        padding: 0.4rem 1rem;
         font-weight: 600;
+        padding: 0.4rem 1rem;
         border: none;
+        border-radius: 6px;
     }
 
     .stButton>button:hover {
@@ -34,29 +50,19 @@ st.markdown(
         color: black !important;
     }
 
-    .stTextInput>div>div>input,
-    .stSelectbox>div>div,
-    .stRadio>div>label {
-        background-color: white !important;
-        color: #1A237E !important;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-    }
-
-    .st-expander > summary {
-        font-weight: bold;
-        color: #1A237E;
-    }
-
+    /* Progress bar */
     .stProgress > div > div > div {
         background-color: #1A237E !important;
     }
 
-    .stAlert {
-        border-left: 6px solid #FFD700;
+    /* Expander titles */
+    .st-expander > summary {
+        font-weight: bold;
+        color: #1A237E !important;
     }
 
-    .css-1v3fvcr { /* Tag pills */
+    /* Tag Pills */
+    .css-1v3fvcr {
         background-color: #FFD700 !important;
         color: black !important;
         font-weight: 500;
@@ -64,6 +70,12 @@ st.markdown(
         padding: 0.2rem 0.6rem;
     }
 
+    /* Info box (light blue bg) */
+    .stAlert {
+        background-color: #E3F2FD !important;
+        border-left: 6px solid #1A237E !important;
+        color: #1A237E !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
