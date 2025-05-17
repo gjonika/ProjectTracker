@@ -15,7 +15,7 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-local_css("theme.css")
+local_css("styles/theme.css")  # Assuming theme.css is inside a folder called "styles"
 
 # --- Top Button Bar + View Mode Toggle ---
 st.title("📋 Project Dashboard")
