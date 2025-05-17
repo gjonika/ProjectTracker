@@ -1,9 +1,11 @@
-/* === GENERAL === */
+/* === GLOBAL === */
 html,
 body,
 .stApp {
-  background-color: #F7F8FA !important;
-  color: #1A202C !important;
+  background-color: #FFFDF4 !important;
+  /* Light ivory */
+  color: #1A237E !important;
+  /* Deep navy */
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -12,30 +14,16 @@ h1,
 h2,
 h3,
 h4,
+h5,
+h6,
 .stMarkdown h1 {
-  color: #1A202C !important;
-}
-
-/* === BUTTONS === */
-.stButton>button {
-  background-color: #1A237E !important;
-  color: white !important;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  font-weight: 500;
-  transition: 0.2s ease-in-out;
-}
-
-.stButton>button:hover {
-  background-color: #2C387E !important;
+  color: #1A237E !important;
 }
 
 /* === TABS === */
 .stTabs [data-baseweb="tab"] {
   background-color: transparent;
   color: #1A237E;
-  border: none;
   font-weight: 500;
 }
 
@@ -43,16 +31,45 @@ h4,
   border-bottom: 2px solid #1A237E;
 }
 
-/* === INPUT FIELDS === */
-input,
-textarea {
-  background-color: #fff !important;
-  border: 1px solid #E0E0E0 !important;
-  border-radius: 6px !important;
-  color: #1A202C !important;
+/* === BUTTONS === */
+.stButton>button {
+  background-color: #1A237E !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  border: none;
 }
 
-/* === CARDS (containers) === */
+.stButton>button:hover {
+  background-color: #FFD700 !important;
+  color: #000 !important;
+}
+
+/* === INPUTS & SELECTS === */
+input,
+textarea,
+select {
+  background-color: white !important;
+  color: #1A237E !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  padding: 0.4rem !important;
+}
+
+/* === INFO / ERROR BOXES === */
+.stAlert {
+  background-color: #E3F2FD !important;
+  color: #1A237E !important;
+  border-left: 4px solid #1A237E !important;
+  font-weight: 500;
+}
+
+.stAlert p {
+  margin: 0 !important;
+}
+
+/* === CARDS === */
 .stContainer {
   background-color: #FFFFFF !important;
   border-radius: 12px;
@@ -60,31 +77,24 @@ textarea {
   padding: 1rem;
 }
 
-/* === TAGS === */
-.badge,
-.stMarkdown span {
-  background-color: #E8F0FE !important;
-  color: #1A237E !important;
-  border-radius: 4px;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.85rem;
+/* === TAGS & BADGES === */
+.css-1v3fvcr,
+.badge {
+  background-color: #FFD700 !important;
+  color: #000 !important;
   font-weight: 500;
+  border-radius: 12px;
+  padding: 0.2rem 0.6rem;
 }
 
-/* === ERROR MESSAGES === */
-.stAlert {
-  background-color: #FFEBEE !important;
-  color: #B71C1C !important;
-  border-left: 4px solid #E53935 !important;
-}
-
-/* === PROGRESS BARS === */
+/* === PROGRESS BAR === */
 .css-1cpxqw2 {
   background-color: #1A237E !important;
 }
 
 /* === EXPANDERS === */
-.stExpanderHeader {
-  font-weight: 500;
-  color: #1A202C;
+.stExpanderHeader,
+summary {
+  font-weight: bold;
+  color: #1A237E !important;
 }
