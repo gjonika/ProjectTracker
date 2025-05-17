@@ -1,13 +1,13 @@
-# App title
-st.set_page_config(page_title="Project Tracker", layout="centered")
-st.title("📋 Personal Project Tracker")
+
 import streamlit as st
 import json
 import os
 from datetime import datetime
 from components.project_dashboard_ui import render_project_dashboard_ui
 from utils.data_loader import load_projects_from_json
-
+# App title
+st.set_page_config(page_title="Project Tracker", layout="centered")
+st.title("📋 Personal Project Tracker")
 
 # Paths to JSON files
 PROJECTS_FILE = "data/projects.json"
