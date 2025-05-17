@@ -71,11 +71,15 @@ st.markdown(
     }
 
     /* Info box (light blue bg) */
-    .stAlert {
-        background-color: #E3F2FD !important;
-        border-left: 6px solid #1A237E !important;
-        color: #1A237E !important;
-    }
+/* Fix light text in info box */
+.stAlert p {
+    font-size: 1rem !important;
+    background-color: #E3F2FD !important; /* Soft blue */
+    border-left: 6px solid #1A237E !important;
+    color: #1A237E !important; /* Dark text for readability */
+    font-weight: 500;
+}
+
     </style>
     """,
     unsafe_allow_html=True
