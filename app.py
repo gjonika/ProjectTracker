@@ -1,9 +1,13 @@
-from components.project_dashboard_ui import render_project_dashboard_ui
-from utils.data_loader import load_projects_from_json
+# App title
+st.set_page_config(page_title="Project Tracker", layout="centered")
+st.title("📋 Personal Project Tracker")
 import streamlit as st
 import json
 import os
 from datetime import datetime
+from components.project_dashboard_ui import render_project_dashboard_ui
+from utils.data_loader import load_projects_from_json
+
 
 # Paths to JSON files
 PROJECTS_FILE = "data/projects.json"
@@ -24,7 +28,7 @@ with tabs[1]:
             render_project_dashboard_ui(projects)
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
-        
+
 # Load/save helpers
 def load_json(file):
     if not os.path.exists(file):
@@ -41,9 +45,7 @@ def save_json(file, data):
 projects = load_json(PROJECTS_FILE)
 activity_log = load_json(ACTIVITY_FILE)
 
-# App title
-st.set_page_config(page_title="Project Tracker", layout="centered")
-st.title("📋 Personal Project Tracker")
+
 
 # --- New Project Form ---
 with st.expander("➕ Add New Project"):
