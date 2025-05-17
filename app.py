@@ -7,6 +7,49 @@ from utils.data_loader import load_projects_from_json, import_projects_from_csv
 
 st.set_page_config(page_title="Project Tracker", layout="centered")
 
+# Light luxury theme
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #F5F5F5;
+        color: #434A54;
+    }
+    .stButton>button {
+        background-color: #1A237E;
+        color: white;
+        border-radius: 6px;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        font-weight: 600;
+    }
+    .stButton>button:hover {
+        background-color: #FFD700;
+        color: black;
+    }
+    .stTextInput>div>div>input {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .stSelectbox>div>div {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .stMarkdown h3 {
+        color: #1A237E;
+    }
+    .st-expander > summary {
+        font-weight: bold;
+        color: #1A237E;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 PROJECTS_FILE = "data/projects.json"
 TEMPLATE_CSV = "data/sample_template.csv"
 
