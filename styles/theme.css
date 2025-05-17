@@ -120,3 +120,50 @@ summary {
 .stTabs [role="tab"][aria-selected="true"] {
   border-bottom: 2px solid #1A237E !important;
 }
+
+.st-emotion-cache-1avcm0n {
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+div[data-testid="stFileUploaderDropzone"] {
+  border: 2px dashed #999;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+button[kind="primary"] {
+  background-color: #002366 !important;
+  color: white !important;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+}
+
+.stAlert-success {
+  background-color: #d9fbe4 !important;
+  border-left: 5px solid #00a86b;
+  color: #1b4d3e;
+}
+
+.stAlert-error {
+  background-color: #ffe0e0 !important;
+  border-left: 5px solid #c62828;
+  color: #5c0000;
+}
+
+.stTabs {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stTabs [aria-selected="true"] {
+  border-bottom: 3px solid #002366;
+  font-weight: bold;
+  color: #002366 !important;
+}
