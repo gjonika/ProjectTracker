@@ -24,15 +24,16 @@ with tabs[0]:
         st.download_button("📄 Download CSV Template", f, "project_template.csv")
 
     # Upload CSV
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-    if uploaded_file:
-        from utils.data_loader import import_projects_from_csv
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+if uploaded_file:
+    from utils.data_loader import import_projects_from_csv
 
-        try:
-            count = import_projects_from_csv(uploaded_file)
-            st.success(f"✅ Imported {count} projects!")
-        except Exception as e:
-            st.error(f"❌ Failed to import: {e}")
+    try:
+        count = import_projects_from_csv(uploaded_file)
+        st.success(f"✅ Imported {count} projects!")
+    except Exception as e:
+        st.error(f"❌ Failed to import: {e}")
+
 
 
 with tabs[1]:
