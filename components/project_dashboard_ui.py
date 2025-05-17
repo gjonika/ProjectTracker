@@ -1,4 +1,7 @@
+# components/project_dashboard_ui.py
+
 import streamlit as st
+
 def render_project_dashboard_ui(projects=None):
     st.title("📋 Project Dashboard")
     st.caption("Track and manage your side projects")

@@ -1,65 +1,18 @@
 from components.project_dashboard_ui import render_project_dashboard_ui
+from utils.data_loader import load_projects_from_json
 import streamlit as st
-from utils.data_loader import (
-    import_projects_from_csv,
-    save_projects_to_json,
-    load_projects_from_json,
-)
+import json
 import os
-import tempfile
+from datetime import datetime
 
-st.set_page_config(page_title="Project Tracker", layout="wide")
+# Paths to JSON files
+PROJECTS_FILE = "data/projects.json"
+ACTIVITY_FILE = "data/activity_log.json"
+
 
 tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
 
-# === 1. IMPORT TAB ===
-with tabs[0]:
-    st.title("📥 Import Projects from CSV")
-
-    st.download_button(
-        label="📄 Download CSV Template",
-        data=open("templates/sample_projects.csv", "rb").read(),
-        file_name="sample_projects.csv",
-        mime="text/csv",
-    )
-
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-
-    if uploaded_file is not None:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp:
-            tmp.write(uploaded_file.getvalue())
-            temp_path = tmp.name
-
-        try:
-            projects = import_projects_from_csv(temp_path)
-
-            st.success(f"✅ Imported {len(projects)} projects!")
-
-            for project in projects:
-                with st.expander(f"{project.name} ({project.status})"):
-                    st.markdown(f"**Summary:** {project.summary}")
-                    st.markdown(f"**Type:** {project.type}")
-                    st.markdown(f"**Stage:** {project.stage}")
-                    st.progress(project.progress / 100)
-                    st.markdown(f"**Tags:** {', '.join(project.tags)}")
-                    st.markdown(f"**GitHub:** {project.githubUrl}")
-                    st.markdown(f"**Website:** {project.websiteUrl}")
-                    st.markdown(f"**Next Action:** {project.nextAction}")
-                    st.markdown(f"**Activity Log:**")
-                    st.markdown("<br>".join(f"- {a}" for a in project.activityLog), unsafe_allow_html=True)
-
-            if st.button("💾 Save to projects.json"):
-                save_projects_to_json(projects, "data/projects.json")
-                st.success("Projects saved!")
-
-        except Exception as e:
-            st.error(f"❌ Failed to import: {e}")
-
-# === 2. VIEW PROJECTS TAB ===
 with tabs[1]:
-    render_project_dashboard_ui()
-    st.title("📋 Project Dashboard")
-
     json_path = "data/projects.json"
 
     if os.path.exists(json_path):
@@ -68,43 +21,89 @@ with tabs[1]:
         if not projects:
             st.info("No projects to display yet.")
         else:
-            for project in projects:
-                with st.container():
-                    st.markdown(f"### {project.name} {'💰' if project.isMonetized else ''}")
-                    st.markdown(f"**{project.summary}**")
-                    st.caption(project.description)
-
-                    col1, col2, col3 = st.columns([1, 1, 2])
-                    with col1:
-                        st.markdown(f"📌 **Status:** `{project.status}`")
-                    with col2:
-                        st.markdown(f"🛠️ **Stage:** `{project.stage}`")
-                    with col3:
-                        st.markdown(f"🏷️ **Type:** `{project.type}`")
-
-                    st.progress(project.progress / 100)
-
-                    st.markdown(f"⭐ **Usefulness:** {project.usefulness}/5")
-                    st.markdown(f"🏷️ **Tags:** {', '.join(project.tags)}")
-                    st.markdown(f"🎯 **Next Action:** _{project.nextAction}_")
-
-                    links = []
-                    if project.githubUrl:
-                        links.append(f"[GitHub]({project.githubUrl})")
-                    if project.websiteUrl:
-                        links.append(f"[Website]({project.websiteUrl})")
-                    if links:
-                        st.markdown("🔗 " + " | ".join(links))
-
-                    st.caption(f"🕓 Last Updated: `{project.lastUpdated}`")
-
-                    with st.expander("📝 Activity Log"):
-                        if project.activityLog:
-                            for i, log in enumerate(project.activityLog, start=1):
-                                st.markdown(f"- {log}")
-                        else:
-                            st.markdown("_No updates yet._")
-
-                    st.divider()
+            render_project_dashboard_ui(projects)
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
+        
+# Load/save helpers
+def load_json(file):
+    if not os.path.exists(file):
+        with open(file, "w") as f:
+            json.dump([], f)
+    with open(file, "r") as f:
+        return json.load(f)
+
+def save_json(file, data):
+    with open(file, "w") as f:
+        json.dump(data, f, indent=2)
+
+# Load project and activity data
+projects = load_json(PROJECTS_FILE)
+activity_log = load_json(ACTIVITY_FILE)
+
+# App title
+st.set_page_config(page_title="Project Tracker", layout="centered")
+st.title("📋 Personal Project Tracker")
+
+# --- New Project Form ---
+with st.expander("➕ Add New Project"):
+    with st.form("new_project_form"):
+        name = st.text_input("Project Name*", "")
+        description = st.text_area("Description", "")
+        ptype = st.selectbox("Type", ["Personal", "For Sale"])
+        status = st.selectbox("Status", ["Idea", "In Progress", "Live", "Abandoned"])
+        stage = st.selectbox("Stage", ["Idea", "Build", "Market", "Launch"])
+        usefulness = st.select_slider("Usefulness", options=[1, 2, 3, 4, 5], value=3)
+        monetized = st.checkbox("Monetized 💰")
+        github_url = st.text_input("GitHub URL")
+        next_action = st.text_input("Next Action")
+
+        submitted = st.form_submit_button("Create Project")
+        if submitted and name:
+            new_project = {
+                "id": len(projects) + 1,
+                "name": name,
+                "description": description,
+                "type": ptype,
+                "status": status,
+                "stage": stage,
+                "usefulness": usefulness,
+                "monetized": monetized,
+                "github_url": github_url,
+                "next_action": next_action,
+                "created": datetime.now().isoformat()
+            }
+            projects.append(new_project)
+            save_json(PROJECTS_FILE, projects)
+
+            activity_log.append({
+                "action": "Created Project",
+                "project": name,
+                "timestamp": datetime.now().isoformat()
+            })
+            save_json(ACTIVITY_FILE, activity_log)
+            st.success("✅ Project created!")
+
+# --- Project List Display ---
+st.subheader("📁 All Projects")
+if projects:
+    for proj in reversed(projects):
+        st.markdown(f"### {proj['name']}")
+        st.markdown(f"**Status:** `{proj['status']}` | **Stage:** `{proj['stage']}` | **Type:** `{proj['type']}`")
+        st.progress(proj['usefulness'] * 0.2)
+        st.markdown(f"**Description:** {proj['description'] or '_No description_'}")
+        if proj['next_action']:
+            st.markdown(f"**Next Action:** _{proj['next_action']}_")
+        if proj['github_url']:
+            st.markdown(f"[GitHub ↗]({proj['github_url']})")
+        st.markdown("---")
+else:
+    st.info("No projects yet. Add your first one above!")
+
+# --- Activity Log ---
+with st.expander("🕓 Activity Log"):
+    if activity_log:
+        for log in reversed(activity_log):
+            st.markdown(f"- {log['timestamp'][:19]} → **{log['action']}**: `{log['project']}`")
+    else:
+        st.write("No activity yet.")
