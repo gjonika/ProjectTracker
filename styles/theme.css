@@ -1,13 +1,22 @@
-/* === GLOBAL === */
+/* === GLOBAL BACKGROUND === */
 html,
-body,
-.stApp {
+body {
   background-color: #FFFDF4 !important;
-  /* Light ivory */
   color: #1A237E !important;
-  /* Deep navy */
-  font-family: 'Segoe UI', sans-serif;
 }
+
+[data-testid="stAppViewContainer"] {
+  background-color: #FFFDF4 !important;
+  /* full width background */
+  color: #1A237E !important;
+}
+
+[data-testid="stHeader"],
+[data-testid="stToolbar"] {
+  background-color: #FFFDF4 !important;
+  color: #1A237E !important;
+}
+
 
 /* === HEADINGS === */
 h1,
@@ -97,4 +106,17 @@ select {
 summary {
   font-weight: bold;
   color: #1A237E !important;
+}
+
+.stTabs [role="tab"] {
+  background-color: transparent;
+  color: #1A237E !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+}
+
+.stTabs [role="tab"][aria-selected="true"] {
+  border-bottom: 2px solid #1A237E !important;
 }
