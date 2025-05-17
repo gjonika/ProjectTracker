@@ -12,6 +12,11 @@ PROJECTS_FILE = "data/projects.json"
 TEMPLATE_CSV = "data/sample_template.csv"
 
 tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+local_css("theme.css")
 
 # --- TAB 1: Import CSV ---
 with tabs[0]:
@@ -43,7 +48,3 @@ with tabs[1]:
             render_project_dashboard_ui(projects)
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
-
-# app.py or main
-with open("styles/theme.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
