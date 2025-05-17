@@ -54,3 +54,11 @@ def load_projects_from_json(json_path: str) -> List[Project]:
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
         return [Project(**p) for p in data]
+
+def load_projects_from_json(json_path: str) -> List[Project]:
+    try:
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return [Project(**p) for p in data]
+    except (json.JSONDecodeError, FileNotFoundError):
+        return []
