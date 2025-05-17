@@ -122,3 +122,7 @@ with tabs[1]:
             render_project_dashboard_ui(projects)
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
+
+# app.py or main
+with open("styles/theme.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
