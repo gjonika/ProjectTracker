@@ -1,79 +1,109 @@
-/* Base layout */
+/* === GLOBAL STYLING === */
 html,
 body,
 [data-testid="stAppViewContainer"] {
-  background-color: #FFFDF6 !important;
-  /* Ivory base */
-  color: #1A237E;
-  /* Deep Navy text */
+  background-color: #FAF9F6 !important;
+  /* ivory background */
   font-family: 'Segoe UI', sans-serif;
+  color: #1A1A1A !important;
 }
 
-/* Buttons & UI */
-button,
-.stButton>button {
-  background-color: #1A237E !important;
-  color: white !important;
-  border-radius: 8px !important;
+/* === HEADERS === */
+h1,
+h2,
+h3,
+h4 {
+  color: #1A237E !important;
+  font-weight: 600;
+}
+
+/* === TABS === */
+.stTabs {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stTabs [role="tab"] {
+  color: #1A237E !important;
+  font-weight: 500;
   padding: 0.5rem 1rem;
 }
 
-button:hover {
-  background-color: #3b4cca !important;
+.stTabs [role="tab"][aria-selected="true"] {
+  border-bottom: 2px solid #1A237E !important;
 }
 
-/* File uploader container */
+/* === CONTAINERS / SECTIONS === */
+.stContainer,
+.stVerticalBlock {
+  background-color: #fff !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* === FILE UPLOADER === */
 [data-testid="stFileUploader"] {
-  border: 1px solid #ccc !important;
-  background-color: #f9f9f9 !important;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-top: 1rem;
+  border: 2px dashed #A9A9A9 !important;
+  background-color: #FCFCFC !important;
+  padding: 1.5rem !important;
+  border-radius: 10px !important;
+  text-align: center;
+  color: #333 !important;
 }
 
-/* Tabs underline */
-[data-testid="stTabs"]>div[role="tablist"]>div {
-  border-bottom: 2px solid #A9A9A9;
-}
-
-[data-testid="stMarkdownContainer"] h2 {
-  border-bottom: 1px solid #dcdcdc;
-  padding-bottom: 0.3rem;
-}
-
-/* CSV template download button */
-.stDownloadButton {
-  border: 1px solid #333;
+/* === DOWNLOAD BUTTON === */
+.stDownloadButton button {
   background-color: #1A237E !important;
   color: white !important;
+  font-weight: 600;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+}
+
+.stDownloadButton button:hover {
+  background-color: #FFD700 !important;
+  color: black !important;
+}
+
+/* === PRIMARY BUTTON === */
+.stButton>button {
+  background-color: #1A237E !important;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
-  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
 }
 
-.stDownloadButton:hover {
-  background-color: #3b4cca !important;
+.stButton>button:hover {
+  background-color: #3949AB !important;
 }
 
-/* Project card box (dashboard UI) */
-.project-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background-color: #ffffff;
+/* === ALERTS / INFO BOXES === */
+.stAlert {
+  border-left: 4px solid #1A237E !important;
+  background-color: #F1F5FB !important;
+  color: #1A237E !important;
+  border-radius: 8px;
   padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* Highlighted success message */
-.stAlert-success {
-  background-color: #E0F8E9 !important;
-  color: #006400 !important;
-}
-
-/* File dropzone inner fix */
-[data-testid="stFileDropzone"] {
-  background-color: #272733 !important;
-  color: #f5f5f5 !important;
+/* === INPUTS === */
+input,
+textarea {
+  border: 1px solid #D3D3D3 !important;
   border-radius: 6px !important;
-  border: none !important;
+  padding: 0.4rem 0.8rem !important;
+  font-size: 1rem !important;
+  background-color: #fff !important;
+  color: #1A1A1A !important;
+}
+
+/* === PROGRESS BARS === */
+.stProgress>div>div>div {
+  background-color: #1A237E !important;
 }
