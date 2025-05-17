@@ -5,30 +5,43 @@ from datetime import datetime
 from components.project_dashboard_ui import render_project_dashboard_ui
 from utils.data_loader import load_projects_from_json, import_projects_from_csv
 
-st.set_page_config(page_title="Project Tracker", layout="centered")
-
+st.set_page_config(page_title="Project Tracker", layout="wide")
 
 PROJECTS_FILE = "data/projects.json"
 TEMPLATE_CSV = "data/sample_template.csv"
 
-tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
-
+# Load external CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-local_css("styles/theme.css")  # ✅ Corrected path
+local_css("theme.css")
 
+# --- Top Button Bar + View Mode Toggle ---
+st.title("📋 Project Dashboard")
+
+buttons = st.columns([1, 1, 1, 1, 2])
+with buttons[0]:
+    st.button("➕ Add Project")
+with buttons[1]:
+    st.button("📥 Import CSV")
+with buttons[2]:
+    st.button("📤 Export JSON")
+with buttons[3]:
+    st.button("📤 Export CSV")
+with buttons[4]:
+    view_mode = st.radio("View", ["Grid", "List"], horizontal=True, label_visibility="collapsed")
+
+# --- Page Tabs ---
+tabs = st.tabs(["📥 Import CSV", "📋 View Projects"])
 
 # --- TAB 1: Import CSV ---
 with tabs[0]:
     st.subheader("📥 Import Projects from CSV")
 
-    # Download Template
     with open(TEMPLATE_CSV, "rb") as f:
         st.download_button("📄 Download CSV Template", f, "project_template.csv")
 
-    # Upload CSV
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
     if uploaded_file:
         try:
@@ -47,6 +60,15 @@ with tabs[1]:
         if not projects:
             st.info("No projects to display yet.")
         else:
-            render_project_dashboard_ui(projects)
+            if view_mode == "Grid":
+                cols = st.columns(3)
+                for i, project in enumerate(projects):
+                    with cols[i % 3]:
+                        with st.container():
+                            st.markdown(render_project_dashboard_ui(project), unsafe_allow_html=True)
+            else:
+                for project in projects:
+                    with st.container():
+                        st.markdown(render_project_dashboard_ui(project), unsafe_allow_html=True)
     else:
         st.warning("⚠️ No projects.json file found. Please import a CSV first.")
