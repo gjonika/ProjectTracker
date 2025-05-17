@@ -1,3 +1,4 @@
+from components.project_dashboard_ui import render_project_dashboard_ui
 import streamlit as st
 from utils.data_loader import (
     import_projects_from_csv,
@@ -56,6 +57,7 @@ with tabs[0]:
 
 # === 2. VIEW PROJECTS TAB ===
 with tabs[1]:
+    render_project_dashboard_ui()
     st.title("📋 Project Dashboard")
 
     json_path = "data/projects.json"
