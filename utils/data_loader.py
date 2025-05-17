@@ -27,7 +27,7 @@ def import_projects_from_csv(uploaded_file, json_path="data/projects.json"):
             "summary": str(row.get("summary", "")).strip(),
             "description": str(row.get("description", "")).strip(),
             "type": str(row.get("type", "")).strip(),
-            "usefulness": int(row.get("usefulness", 0)),
+            "usefulness": safe_int(row.get("usefulness")),
             "status": str(row.get("status", "")).lower().strip(),
             "stage": str(row.get("stage", "")).strip(),
             "isMonetized": str(row.get("isMonetized", "")).lower() == "true",
@@ -35,7 +35,7 @@ def import_projects_from_csv(uploaded_file, json_path="data/projects.json"):
             "websiteUrl": str(row.get("websiteUrl", "")).strip(),
             "nextAction": str(row.get("nextAction", "")).strip(),
             "lastUpdated": str(row.get("lastUpdated", "")).strip(),
-            "progress": int(row.get("progress", 0)),
+            "progress": safe_int(row.get("progress")),
             "activityLog": [x.strip() for x in str(row.get("activityLog", "")).split(";") if x],
             "tags": [x.strip() for x in str(row.get("tags", "")).split(",") if x],
         })
